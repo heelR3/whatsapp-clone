@@ -13,13 +13,19 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: { origin: process.env.FRONTEND_ORIGIN || "http://localhost:5173", methods: ["GET","POST"] }
+  cors: { origin: process.env.FRONTEND_ORIGIN || "*", methods: ["GET", "POST"] }
 });
+
 
 // make io available to routes via app.locals
 app.locals.io = io;
 
-app.use(cors({ origin: process.env.FRONTEND_ORIGIN || true }));
+app.use(cors({
+  origin: process.env.FRONTEND_ORIGIN || "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
