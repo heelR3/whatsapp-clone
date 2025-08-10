@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+body { @apply bg-gray-100 text-gray-800; }
+::-webkit-scrollbar { height: 8px; width: 8px; }
